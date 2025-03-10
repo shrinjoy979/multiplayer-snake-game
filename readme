@@ -1,0 +1,5 @@
+// npx is a tool, that ship's with node. That allow us to run libraries from npm without running them directly
+// Run on browser: sudo npx live-server
+
+// This calculates the pixels per grid square in game space
+// ie 600px / 20 squares = 30px per square
