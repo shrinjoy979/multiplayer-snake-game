@@ -5,33 +5,11 @@ const FOOD_COLOUR = '#e66916';
 const socket = io('http://localhost:3000');
 
 socket.on('init', handleInit);
+socket.on('gamestate', handleGameState)
 
 const gameScreen = document.getElementById('gameScreen');
 
 let canvas, ctx;
-
-const gameState = {
-    player: {
-        pos: {
-            x: 3,
-            y: 10,
-        },
-        vel: {
-            x: 1,
-            y: 0,
-        },
-        snake: [
-            {x: 1, y: 10},
-            {x: 2, y: 10},
-            {x: 3, y: 10}
-        ],
-    },
-    food: {
-        x: 7,
-        y: 7,
-    },
-    gridsize: 20, // We are working with scren pixel and game grid | we have 600 px in screen grid and 20 Square in game grid
-};
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -78,4 +56,9 @@ paintGame(gameState);
 
 function handleInit(msg) {
     console.log(msg);
+}
+
+function handleGameState(gameState) {
+    gameState = JSON.parse(gameState);
+    requestAnimationFrame(() => paintGame(gameState));
 }
